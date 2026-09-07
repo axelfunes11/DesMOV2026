@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "tsx watch src/main/server.ts",
+  "dev": "tsx watch src/main.ts",
   "build": "tsc",
-  "start": "node dist/main/server.js",
-  "db:migrate": "sequelize-cli db:migrate",
-  "db:migrate:undo": "sequelize-cli db:migrate:undo",
-  "db:seed": "sequelize-cli db:seed:all"
+  "start": "node dist/main.js"
   },
   "keywords": [],
   "author": "",
