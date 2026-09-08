@@ -7,7 +7,9 @@
     "dev": "tsx watch src/main.ts",
     "build": "tsc",
     "start": "node dist/main.js",
-    "seed:user": "tsx src/infrastructure/database/seedUser.ts"
+    "seed:user": "tsx src/infrastructure/database/seedUser.ts",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo"
   },
   "keywords": [],
   "author": "",

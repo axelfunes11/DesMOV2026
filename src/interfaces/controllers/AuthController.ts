@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import { AuthService } from "../../domain/services/AuthService";
 import { createResponse } from "../responses/StandardResponse";
 
@@ -16,7 +15,7 @@ export class AuthController {
 
         try {
 
-           const { email, password } = req.body ?? {};
+            const { email, password } = req.body ?? {};
 
             if (!email || !password) {
                 return res.status(400).json(
@@ -73,4 +72,106 @@ export class AuthController {
             );
         }
     };
-}
+
+
+    // AQUÍ VA REGISTER, TODAVÍA DENTRO DE LA CLASE
+
+    register = async (
+        req: Request,
+        res: Response
+    ): Promise<Response> => {
+
+        try {
+
+            const {
+                name,
+                lastName,
+                username,
+                email,
+                password,
+                age,
+                gender,
+                city,
+                phone,
+                profilePhoto
+            } = req.body ?? {};
+
+            if (
+                !name ||
+                !lastName ||
+                !username ||
+                !email ||
+                !password ||
+                age === undefined ||
+                !gender ||
+                !city ||
+                !phone
+            ) {
+
+                return res.status(400).json(
+                    createResponse(
+                        400,
+                        "Bad Request",
+                        {
+                            detail: "Faltan datos obligatorios"
+                        }
+                    )
+                );
+            }
+
+            const result = await this.authService.register({
+                name,
+                lastName,
+                username,
+                email,
+                password,
+                age: Number(age),
+                gender,
+                city,
+                phone,
+                profilePhoto: profilePhoto ?? null
+            });
+
+            if (!result.success) {
+
+                const detail =
+                    result.reason === "EMAIL_EXISTS"
+                        ? "El email ya está registrado"
+                        : "El username ya está registrado";
+
+                return res.status(409).json(
+                    createResponse(
+                        409,
+                        "Conflict",
+                        {
+                            detail
+                        }
+                    )
+                );
+            }
+
+            return res.status(201).json(
+                createResponse(
+                    201,
+                    "Created",
+                    {
+                        user: result.user
+                    }
+                )
+            );
+
+        } catch (error) {
+
+            console.error("Error en registro:", error);
+
+            return res.status(500).json(
+                createResponse(
+                    500,
+                    "Internal Server Error",
+                    null
+                )
+            );
+        }
+    };
+
+} // ← ESTE es el cierre final de AuthController
