@@ -2,7 +2,7 @@ import {
     UserProfile,
     UserService,
     UpdateProfileData
-} from "../../domain/services/Userservice";
+} from "../../domain/services/UserService"; 
 
 import UserModel from "../models/UserModel";
 

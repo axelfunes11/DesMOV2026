@@ -3,7 +3,7 @@ import {
     Response
 } from "express";
 
-import { UserService } from "../../domain/services/Userservice";
+import { UserService } from "../../domain/services/UserService";  
 import { createResponse } from "../responses/StandardResponse";
 
 export class UserController {

@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
 import app from "./app";
-import { initDatabase } from "./infrastructure/database/initdatabase";
+import { initDatabase } from "./infrastructure/database/initDatabase";
 
 dotenv.config();
 
@@ -12,7 +12,9 @@ const startServer = async (): Promise<void> => {
         await initDatabase();
 
         app.listen(PORT, () => {
-            console.log(`Backend ejecutándose en http://localhost:${PORT}`);
+            console.log(
+                `Backend ejecutándose en http://localhost:${PORT}`
+            );
         });
 
     } catch (error) {
