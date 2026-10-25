@@ -21,6 +21,7 @@ interface UserAttributes {
     city?: string | null;
     phone?: string | null;
     profilePhoto?: string | null;
+    profilePhotoData?: Buffer | null;
 
     createdAt?: Date;
     updatedAt?: Date;
@@ -37,6 +38,7 @@ interface UserCreationAttributes
         | "city"
         | "phone"
         | "profilePhoto"
+        | "profilePhotoData"
     > { }
 
 class UserModel
@@ -57,6 +59,7 @@ class UserModel
     public city!: string | null;
     public phone!: string | null;
     public profilePhoto!: string | null;
+    public profilePhotoData!: Buffer | null;
 
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -120,7 +123,12 @@ UserModel.init(
         profilePhoto: {
             type: DataTypes.STRING(500),
             allowNull: true
-        }
+        },
+        profilePhotoData: {
+            type: DataTypes.BLOB("long"),
+            allowNull: true
+        }   
+
     },
     {
         sequelize,

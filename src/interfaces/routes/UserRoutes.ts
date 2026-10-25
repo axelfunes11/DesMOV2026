@@ -14,4 +14,5 @@ const userController =
 
 router.get("/me",authMiddleware,userController.getProfile); 
 router.put("/me",authMiddleware,userController.updateProfile);
+router.put("/me/photo",authMiddleware,userController.updateProfilePhoto);
 export default router;
