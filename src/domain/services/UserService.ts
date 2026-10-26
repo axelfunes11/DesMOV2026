@@ -1,3 +1,8 @@
+export type UserRole =
+    "CENSISTA" |
+    "ADMIN";
+
+
 export interface UserProfile {
 
     id: number;
@@ -18,8 +23,24 @@ export interface UserProfile {
 
     phone: string | null;
 
-    // La foto se devuelve al Android como Base64
+
+    /*
+     * La fotografía se devuelve
+     * al Android como Base64.
+     */
     profilePhoto: string | null;
+
+
+    /*
+     * Rol del usuario.
+     *
+     * CENSISTA:
+     * puede registrar censos.
+     *
+     * ADMIN:
+     * puede visualizar censos.
+     */
+    role: UserRole;
 }
 
 
@@ -43,6 +64,13 @@ export interface UpdateProfileData {
 }
 
 
+/*
+ * No colocamos "role" dentro de
+ * UpdateProfileData.
+ *
+ * El usuario NO debe poder cambiar
+ * su propio rol desde "Mi perfil".
+ */
 export interface UserService {
 
     getProfile(

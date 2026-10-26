@@ -16,22 +16,64 @@ export class UserServiceImpl
     ): UserProfile {
 
         return {
-            id: user.id,
-            name: user.name,
-            lastName: user.lastName,
-            username: user.username,
-            email: user.email,
-            age: user.age,
-            gender: user.gender,
-            city: user.city,
-            phone: user.phone,
 
-            profilePhoto: user.profilePhotoData
-                ? user.profilePhotoData.toString("base64")
-                : null
+            id:
+                user.id,
+
+            name:
+                user.name,
+
+            lastName:
+                user.lastName,
+
+            username:
+                user.username,
+
+            email:
+                user.email,
+
+            age:
+                user.age,
+
+            gender:
+                user.gender,
+
+            city:
+                user.city,
+
+            phone:
+                user.phone,
+
+
+            /*
+             * Foto almacenada como BYTEA
+             * en PostgreSQL.
+             *
+             * Se devuelve al Android
+             * como Base64.
+             */
+            profilePhoto:
+                user.profilePhotoData
+                    ? user.profilePhotoData
+                        .toString("base64")
+                    : null,
+
+
+            /*
+             * Rol del usuario.
+             *
+             * CENSISTA
+             * ADMIN
+             */
+            role:
+                user.role
         };
     }
 
+
+    // =====================================================
+    // OBTENER PERFIL
+    // =====================================================
 
     async getProfile(
         userId: number
@@ -42,13 +84,22 @@ export class UserServiceImpl
                 userId
             );
 
+
         if (!user) {
+
             return null;
         }
 
-        return this.mapUser(user);
+
+        return this.mapUser(
+            user
+        );
     }
 
+
+    // =====================================================
+    // ACTUALIZAR DATOS DEL PERFIL
+    // =====================================================
 
     async updateProfile(
         userId: number,
@@ -60,17 +111,27 @@ export class UserServiceImpl
                 userId
             );
 
+
         if (!user) {
+
             return null;
         }
 
 
-        await user.update(data);
+        await user.update(
+            data
+        );
 
 
-        return this.mapUser(user);
+        return this.mapUser(
+            user
+        );
     }
 
+
+    // =====================================================
+    // ACTUALIZAR FOTO DE PERFIL
+    // =====================================================
 
     async updateProfilePhoto(
         userId: number,
@@ -82,17 +143,22 @@ export class UserServiceImpl
                 userId
             );
 
+
         if (!user) {
+
             return null;
         }
 
 
         await user.update({
+
             profilePhotoData:
                 photoData
         });
 
 
-        return this.mapUser(user);
+        return this.mapUser(
+            user
+        );
     }
 }
