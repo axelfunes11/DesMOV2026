@@ -3,3 +3,10 @@ dist/
 .env
 *.log
 .vscode/
+.env.*
+**/local.properties
+**/.gradle/
+**/.idea/
+**/build/
+*.jks
+*.keystore
