@@ -15,6 +15,7 @@ import {
 
 
 import UserModel from "../models/UserModel";
+import { capitalizeWords } from "../../utils/TextFormatter";
 
 
 export class AuthServiceImpl
@@ -261,41 +262,18 @@ export class AuthServiceImpl
          * porque ese es el defaultValue
          * de UserModel.
          */
-        const user =
-
-            await UserModel.create({
-
-                name:
-                    data.name,
-
-                lastName:
-                    data.lastName,
-
-                username:
-                    data.username,
-
-                email:
-                    data.email,
-
-                password:
-                    hashedPassword,
-
-                age:
-                    data.age,
-
-                gender:
-                    data.gender,
-
-                city:
-                    data.city,
-
-                phone:
-                    data.phone,
-
-                profilePhoto:
-                    data.profilePhoto
-                    ?? null
-            });
+        const user = await UserModel.create({
+            name: capitalizeWords(data.name),
+            lastName: capitalizeWords(data.lastName),
+            username: data.username,
+            email: data.email,
+            password: hashedPassword,
+            age: data.age,
+            gender: data.gender,
+            city: data.city,
+            phone: data.phone,
+            profilePhoto: data.profilePhoto ?? null
+        });
 
 
         return {

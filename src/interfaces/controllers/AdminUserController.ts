@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import UserModel from "../../infrastructure/models/UserModel";
 import { createResponse } from "../responses/StandardResponse";
+import { capitalizeWords } from "../../utils/TextFormatter";
 
 export class AdminUserController {
 
@@ -142,8 +143,8 @@ export class AdminUserController {
 
             const user =
                 await UserModel.create({
-                    name,
-                    lastName,
+                    name: capitalizeWords(name),
+                    lastName: capitalizeWords(lastName),
                     username,
                     email,
                     password:

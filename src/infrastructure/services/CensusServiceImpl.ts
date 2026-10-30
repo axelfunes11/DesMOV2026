@@ -5,6 +5,7 @@ import {
 } from "../../domain/services/CensusService";
 
 import CensusModel from "../models/CensusModel";
+import { capitalizeWords } from "../../utils/TextFormatter";
 
 
 export class CensusServiceImpl
@@ -83,11 +84,8 @@ export class CensusServiceImpl
         const census =
             await CensusModel.create({
 
-                nombre:
-                    data.nombre,
-
-                apellido:
-                    data.apellido,
+                nombre: capitalizeWords(data.nombre),
+                apellido: capitalizeWords(data.apellido),
 
                 totalMiembros:
                     data.totalMiembros,
