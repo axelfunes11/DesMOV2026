@@ -7,6 +7,7 @@ import UserRoutes from "./interfaces/routes/UserRoutes";
 import censusRoutes from "./interfaces/routes/CensusRoutes";
 import LocationRoutes from "./interfaces/routes/LocationRoutes";
 import AdminRoutes from "./interfaces/routes/AdminRoutes";
+import FaceRoutes from "./interfaces/routes/FaceRoutes";
 
 import {
     createResponse
@@ -86,6 +87,15 @@ app.use(
 app.use(
     "/api/v1/admin",
     AdminRoutes
+);
+
+// ==========================================
+// FACE LIVENESS
+// ==========================================
+
+app.use(
+    "/api/v1/face",
+    FaceRoutes
 );
 
 export default app;
